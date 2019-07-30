@@ -1,0 +1,122 @@
+﻿@model IEnumerable<EasyMig.Models.TestDataFile>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+    <style>
+        /*body {
+            background-color: bisque;
+            padding-top: 50px;
+        }*/
+
+    </style>
+</head>
+<body>
+    <!-- S1 -->
+    <div>
+
+        <form class="form-horizontal">
+            @*<div class="jumbotron text-center">
+                <h2>Test Data Creation</h2>
+                </div>*@
+
+            <div class="p-3 mb-2 bg-info text-white text-center">
+                <h2> Test Data Creation</h2>
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="company">Test Data Type:</label>
+                <div class="col-sm-6 col-md-4">
+                    <select id="company" class="form-control">
+                        <option>Customer</option>
+                        <option>Material Plant</option>
+                        <option>Material Sales</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="txtRecords">No. of sample records  :</label>
+                <div class="col-sm-10">
+                    @Html.TextBox("txtRecords", "", new { placeholder = "Enter Num of Records ", @class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    @*<button type="button" onclick='window.location.href = "@Url.Action("GenerateTestData","TestData")"' class="btn btn-primary">Generate Test Data</button>*@
+                    <button type="submit" class="btn btn-primary pull-left">Generate Test Data</button>
+
+                    <button type="button" onclick='window.location.href = "@Url.Action("GeneratMaterialPlantTestData1","TestData")"' class="btn btn-primary">Generate MaterialPlant</button>
+                    @* <button type="submit" class="btn btn-primary pull-left">Generate MaterialPlant</button>*@
+
+                    <button type="button" onclick='window.location.href = "@Url.Action("GeneratMaterialSalesTestData1", "TestData")"' class="btn btn-primary">Generate MaterialSales</button>
+                    @* <button type="submit" class="btn btn-primary pull-left">Generate MaterialPlant</button>*@
+
+
+
+                    <button type="button" onclick='window.location.href = "@Url.Action("GeneratMaterialClassificationData", "TestData")"' class="btn btn-primary">Generate MaterialClassification</button>
+
+
+                    <button type="button" onclick='window.location.href = "@Url.Action("TestDataValidation","TestData")"' class="btn btn-primary pull-right">Data Validation</button>
+                </div>
+                </div>
+
+                @*<div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="button" onclick='window.location.href = "@Url.Action("TestDataValidation","TestData")"' class="btn btn-primary pull-right">Data Validation</button>
+                        </div>
+                </div>*@
+
+            </form>
+        </div>
+
+        <div class="container" style="padding-top:10px;">
+            <form class="form-horizontal">
+                <div class="row">
+                    <table class="table table-responsive table-bordered">
+                        <tr>
+                            <th>Id</th>
+                            <th>FileName</th>
+                            <th>CreatedOn</th>
+                            <th>DownloadPath</th>
+                        </tr>
+
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(model => item.Id)</td>
+                                    <td>@Html.DisplayFor(model => item.Name)</td>
+                                    <td>@Html.DisplayFor(model => item.CreatedOn)</td>
+                                    <td><a href="/TestData/Download?file=@item.DownloadPath" target="_blank">@Html.DisplayFor(model => item.Name)</a></td>
+
+                                </tr>
+                            }
+                        }
+
+                    </table>
+                </div>
+
+            </form>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //$('#datetimepicker1').datetimepicker();
+            })
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,129 @@
+﻿@model IEnumerable<EasyMig.Models.Mandate>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+    <style>
+        /*body {
+            background-color: bisque;
+            padding-top: 50px;
+        }*/
+
+        body {
+            padding-top: 50px;
+        }
+
+        .navbar {
+            height: 50px;
+            padding: 0 15px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+        }
+
+            .navbar a {
+                color: white;
+                line-height: 3em;
+            }
+
+        .table-area {
+            position: relative;
+            z-index: 0;
+            margin-top: 50px;
+        }
+
+        table.responsive-table {
+            display: table;
+            /* required for table-layout to be used (not normally necessary; included for completeness) */
+            table-layout: fixed;
+            /* this keeps your columns with fixed with exactly the right width */
+            width: 100%;
+            /* table must have width set for fixed layout to work as expected */
+            height: 100%;
+        }
+
+            table.responsive-table thead {
+                position: fixed;
+                top: 50px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 50px;
+                line-height: 3em;
+                background: #eee;
+                table-layout: fixed;
+                display: table;
+            }
+
+            table.responsive-table th {
+                background: #eee;
+            }
+
+            table.responsive-table td {
+                line-height: 2em;
+            }
+
+            table.responsive-table tr > td,
+            table.responsive-table th {
+                text-align: left;
+            }
+
+               
+    </style>
+</head>
+<body>   
+
+    <div class="bg-info text-center">
+        <h2>Test Data Validation</h2>
+    </div>
+
+    <hr />
+    <form class="form-horizontal">
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="inputFile">Select Input File : </label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control-file" id="inputFile">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="button" onclick='window.location.href = "@Url.Action("Validate","TestData")"' class="btn btn-primary pull-left">Validate</button>
+                <button type="button" onclick='window.location.href = "@Url.Action("Index","TestData")"' class="btn btn-primary pull-right">Back</button>
+            </div>
+        </div>
+
+        <div>
+            <table class="table table-hover responsive-table">
+                <tr class="panel-heading">
+                    <th>RowId</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                <tr>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@Html.DisplayFor(model => item.rowId) </td>
+                            <td>@Html.DisplayFor(model => item.FirstName) </td>
+                            <td>@Html.DisplayFor(model => item.LastName) </td>
+                        </tr>
+                    }
+                }
+
+                </table>
+            </div>
+        </form>      
+    </body>
+</html>
